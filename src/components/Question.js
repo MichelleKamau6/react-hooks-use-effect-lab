@@ -3,13 +3,9 @@ import React, { useEffect, useState } from "react";
 function Question({ question, onAnswered }) {
   const [timeRemaining, setTimeRemaining] = useState(10);
 
-  // Reset timer when question changes
-  useEffect(() => {
-    setTimeRemaining(10);
-  }, [question]);
-
   useEffect(() => {
     if (timeRemaining === 0) {
+      setTimeRemaining(10);
       onAnswered(false); // Time ran out, answer is incorrect
       return;
     }
@@ -22,6 +18,7 @@ function Question({ question, onAnswered }) {
   }, [timeRemaining, onAnswered]);
 
   function handleAnswer(isCorrect) {
+    setTimeRemaining(10); // reset for next question
     onAnswered(isCorrect);
   }
 
